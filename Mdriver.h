@@ -113,22 +113,14 @@ int rcMove() {
     if (sensorValue >=800){ ///Check if Sensor is Connectet an RC on
 
     
-    if (sensorValue < 1250){
+    if (sensorValue < 1350){
       if (debug){ 
         Serial.println(F("Links"));
       }
-          // set the LED with the ledState of the variable:
-     //digitalWrite(ledPin2, HIGH);
-     //tempo = sensorValue /4;
-     //tempo = tempo *-1; 
-     //tempo = tempo +500;
-
-      tempo = map (sensorValue, 1250, 1015,50,255);
      
+      tempo = map (sensorValue, 1350, 1015,50,254);
      
-    //Drehung Rechts
-
-    
+         
      analogWrite(ledPin2, HIGH); 
      analogWrite(links, 0); 
      analogWrite(rechts, tempo); 
@@ -140,7 +132,7 @@ int rcMove() {
      // set the LED with the ledState of the variable:
       analogWrite(ledPin1, HIGH); 
       //tempo = sensorValue ;////6;
-      tempo = map(sensorValue, 1650,2020,50,255);
+      tempo = map(sensorValue, 1650,2020,50,254);
       //tempo = tempo /5;
       
       analogWrite(rechts, 0);  
