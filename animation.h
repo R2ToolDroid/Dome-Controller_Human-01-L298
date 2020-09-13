@@ -100,11 +100,11 @@ ANIMATION(stopnow)  {
 ANIMATION(toUSB)  {
       DO_START()   
       DO_ONCE_AND_WAIT({ 
-      //Serial.println("To USB");
-      rotateL(Rpos*80);
-      },Rpos*80)
+      Serial.println("To USB");
+      rotateR(Rpos*20);
+      },Rpos*20)
       DO_ONCE_AND_WAIT({ 
-      //Serial.println("Fertig;-)");
+      Serial.println("Fertig;-)");
       resetM();
       },100)
         
@@ -117,8 +117,8 @@ ANIMATION(p1)  {
       DO_START()   
       DO_ONCE_AND_WAIT({ 
       //Serial.println("To USB");
-      rotateL(Rpos*80);
-      },Rpos*80)
+      rotateR(Rpos*60);
+      },Rpos*60)
       DO_ONCE_AND_WAIT({ 
       //Serial.println("Fertig;-)");
       resetM();
@@ -129,7 +129,7 @@ ANIMATION(p1)  {
 ANIMATION(p2)  {
       DO_START()   
       DO_ONCE_AND_WAIT({ 
-       rotateL(Rpos*100);
+       rotateR(Rpos*100);
       },Rpos*100)
       DO_ONCE_AND_WAIT({ 
       resetM();
@@ -140,7 +140,7 @@ ANIMATION(p2)  {
 ANIMATION(p3)  {
       DO_START()   
       DO_ONCE_AND_WAIT({ 
-       rotateL(Rpos*130);
+       rotateR(Rpos*130);
       },Rpos*130)
       DO_ONCE_AND_WAIT({ 
       resetM();
@@ -152,8 +152,8 @@ ANIMATION(p3)  {
 ANIMATION(p4)  {
       DO_START()   
       DO_ONCE_AND_WAIT({ 
-       rotateL(Rpos*180);
-      },Rpos*180)
+       rotateL(Rpos*70);
+      },Rpos*70)
       DO_ONCE_AND_WAIT({ 
       resetM();
       },100)      

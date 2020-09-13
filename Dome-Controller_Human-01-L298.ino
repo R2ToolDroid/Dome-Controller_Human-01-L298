@@ -30,6 +30,7 @@ AnimationPlayer player(servoSequencer);
 
 #include "command.h"
 
+
 void setup(){
   Serial.begin(9600);
   MainInput.begin(9600);

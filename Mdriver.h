@@ -5,8 +5,8 @@ void resetM(){
    digitalWrite(ledPin2, LOW); 
    ledState1 = LOW;
    ledState2 = LOW;
-   digitalWrite(links, 0);  
-   digitalWrite(rechts, 0);  
+   analogWrite(links, 0);  
+   analogWrite(rechts, 0);  
 }
 
 int center(String dir) {
@@ -16,20 +16,20 @@ int center(String dir) {
     Serial.print(F("CenterMode "));
     Serial.println(centerState);
    }
-    digitalWrite(rechts, 0); 
-    digitalWrite(links, 0); 
+    analogWrite(rechts, 0); 
+    analogWrite(links, 0); 
       
       while ( centerState == 0){
 
                  centerState = digitalRead(sensorCenter);  
                 
                 if (dir == "L" ) {
-                  digitalWrite(links, 10); 
+                  analogWrite(links, Rtempo); 
                   digitalWrite(ledPin2, HIGH);                  
                 } 
                 
                 if (dir == "R") {
-                  digitalWrite(rechts, 10); 
+                  analogWrite(rechts, Rtempo); 
                   digitalWrite(ledPin1, HIGH); 
                 }
                 
@@ -39,8 +39,8 @@ int center(String dir) {
       }
    digitalWrite(ledPin1, LOW); 
    digitalWrite(ledPin2, LOW); 
-   digitalWrite(links, 0);  
-   digitalWrite(rechts, 0);  
+   analogWrite(links, 0);  
+   analogWrite(rechts, 0);  
    
    delay(200);
    durchlauf = 0;
@@ -66,43 +66,28 @@ void FindRoTime(){
 
 
 void rotateR( int Rpos) {
-     if (debug){Serial.println(Rpos);}
-     unsigned long currentMillis = millis();
-
-  if (currentMillis - previousMillis >= Rpos) {
-    // save the last time you blinked the LED
-    previousMillis = currentMillis;
-    // if the LED is off turn it on and vice-versa:
-    if (ledState1 == LOW) {
-      ledState1 = HIGH;
-    } else {
-      ledState1 = LOW;
-    }
-    // set the LED with the ledState of the variable:
-    digitalWrite(ledPin1, ledState1);
-    digitalWrite(rechts, ledState1);  
-  } //END IF
+  
+     digitalWrite(ledPin1, HIGH); 
+     analogWrite(links, 0); 
+     analogWrite(rechts, Rtempo);
+     delay (Rpos);
+     digitalWrite(ledPin1, LOW); 
+     analogWrite(links, 0); 
+     analogWrite(rechts, 0);
           
 }
 
 void rotateL( int Rpos) {
-     
-    if (debug){Serial.println(Rpos);}
-     unsigned long currentMillis = millis();
-  if (currentMillis - previousMillis >= Rpos) {
-    // save the last time you blinked the LED
-    previousMillis = currentMillis;
-    // if the LED is off turn it on and vice-versa:
-    if (ledState2 == LOW) {
-      ledState2 = HIGH;
-    } else {
-      ledState2 = LOW;
-    }
-    // set the LED with the ledState of the variable:
-    digitalWrite(ledPin2, ledState2);
-    digitalWrite(links, ledState2); 
+
+     digitalWrite(ledPin2, HIGH); 
+     analogWrite(rechts, 0); 
+     analogWrite(links, Rtempo);
+     delay (Rpos);
+     digitalWrite(ledPin2, LOW); 
+     analogWrite(links, 0); 
+     analogWrite(rechts, 0);
     
-  } //END IF
+  
 }
 
 
@@ -118,9 +103,9 @@ int rcMove() {
      
       int Rtempo = map (sensorValue, 1460, 530,50,254);
      
-      if (Rtempo > 180) {Rtempo=255;}
+      if (Rtempo >= 180) {Rtempo=255;}
          
-     analogWrite(ledPin2, HIGH); 
+     digitalWrite(ledPin2, HIGH); 
      analogWrite(links, 0); 
      analogWrite(rechts, Rtempo); 
 
@@ -133,7 +118,7 @@ int rcMove() {
     } else if (sensorValue > 1650) {
           
      // set the LED with the ledState of the variable:
-      analogWrite(ledPin1, HIGH); 
+      digitalWrite(ledPin1, HIGH); 
       //tempo = sensorValue ;////6;
       int Ltempo = map(sensorValue, 1450,2400,50,254);
       //tempo = tempo /5;
@@ -147,9 +132,9 @@ int rcMove() {
      
     }  else {
       analogWrite(links, 0);  
-      analogWrite(ledPin1, LOW); 
+      digitalWrite(ledPin1, LOW); 
       analogWrite(rechts, 0); 
-      analogWrite(ledPin2, LOW);     
+      digitalWrite(ledPin2, LOW);     
       //delay (zeit);    
     }
 
@@ -170,7 +155,7 @@ void randomMove() {
   // print a random number from 10 to 19
   randNumber = random(10, 40);
   //Speed
-  tempo = random(80,100);
+  tempo = random(90,120);
   //Moving länge
   moving = random(500,1500);
  
@@ -180,11 +165,11 @@ void randomMove() {
      Serial.println(randNumber);
     }
      // set the LED with the ledState of the variable:
-     analogWrite(ledPin2, HIGH);
+     digitalWrite(ledPin2, HIGH);
      analogWrite(links, tempo);  
      delay(moving);
      analogWrite(links, 0);  
-     analogWrite(ledPin2, LOW);
+     digitalWrite(ledPin2, LOW);
      delay(500);
     
     } else if (randNumber > 20 && randNumber <= 30) {  ///Rechts Drehung
@@ -194,10 +179,10 @@ void randomMove() {
       Serial.println(randNumber);
      }
      // set the LED with the ledState of the variable:
-      analogWrite(ledPin1, HIGH);   
+      digitalWrite(ledPin1, HIGH);   
       analogWrite(rechts, tempo); 
       delay(moving);      
-      analogWrite(ledPin1, LOW); 
+      digitalWrite(ledPin1, LOW); 
       analogWrite(rechts, 0); 
       delay(500);
       
@@ -205,8 +190,8 @@ void randomMove() {
       
       analogWrite(links, 0);  
       analogWrite(rechts, 0); 
-      analogWrite(ledPin1, LOW); 
-      analogWrite(ledPin2, LOW); 
+      digitalWrite(ledPin1, LOW); 
+      digitalWrite(ledPin2, LOW); 
       delay (zeit);  
     }
 
@@ -246,7 +231,7 @@ void human(){
            //   gap = 400;
             }
 
-       
+      // if (range > 3000) { //here}
         
         if (debug)
         {  
@@ -290,20 +275,20 @@ void human(){
 
            if (ir4 > ir2){ ////turn right
                 //Serial.print("Dreh nach Rechts");
-                analogWrite(ledPin2, Htempo);  //Dreh nach R
+                digitalWrite(ledPin2, HIGH);  //Dreh nach R
                 analogWrite(links,Htempo); 
            }
            
             if (ir2 > ir4){ ////turn left
                 //Serial.print("Dreh nach links");
-                analogWrite(ledPin1, Htempo);  //Dreh nach L
+                digitalWrite(ledPin1, HIGH);  //Dreh nach L
                 analogWrite(rechts,Htempo); 
            } 
         } else {
-          analogWrite(rechts, LOW); 
-          analogWrite(links, LOW); 
-          analogWrite(ledPin2, LOW);  //Dreh nach L
-          analogWrite(ledPin1, LOW);  //Dreh nach R
+          analogWrite(rechts, 0); 
+          analogWrite(links, 0); 
+          digitalWrite(ledPin2, LOW);  //Dreh nach L
+          digitalWrite(ledPin1, LOW);  //Dreh nach R
         }
 
       
