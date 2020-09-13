@@ -1,7 +1,7 @@
 #include <Arduino.h>                           
 
 String data; //Consohlen Input
-String VERSION = "1-08-2020-Human";
+String VERSION = "1-08-2020-Human  Dome-Controller_Human-01-L298";
 
 byte debug = false;
 long randNumber;

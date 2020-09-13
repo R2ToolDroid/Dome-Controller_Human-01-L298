@@ -24,12 +24,12 @@ int center(String dir) {
                  centerState = digitalRead(sensorCenter);  
                 
                 if (dir == "L" ) {
-                  digitalWrite(links, 50); 
+                  digitalWrite(links, 10); 
                   digitalWrite(ledPin2, HIGH);                  
                 } 
                 
                 if (dir == "R") {
-                  digitalWrite(rechts, 50); 
+                  digitalWrite(rechts, 10); 
                   digitalWrite(ledPin1, HIGH); 
                 }
                 
@@ -114,29 +114,36 @@ int rcMove() {
 
     
     if (sensorValue < 1350){
-      if (debug){ 
-        Serial.println(F("Links"));
-      }
+      
      
-      tempo = map (sensorValue, 1350, 1015,50,254);
+      int Rtempo = map (sensorValue, 1460, 530,50,254);
      
+      if (Rtempo > 180) {Rtempo=255;}
          
      analogWrite(ledPin2, HIGH); 
      analogWrite(links, 0); 
-     analogWrite(rechts, tempo); 
+     analogWrite(rechts, Rtempo); 
+
+     if (debug){ 
+        Serial.println(F("Rechts"));
+         Serial.print(F("RTempo "));Serial.println(Rtempo);
+      } 
+    
     
     } else if (sensorValue > 1650) {
-      if (debug) {
-      Serial.println(F("rechts"));
-      }     
+          
      // set the LED with the ledState of the variable:
       analogWrite(ledPin1, HIGH); 
       //tempo = sensorValue ;////6;
-      tempo = map(sensorValue, 1650,2020,50,254);
+      int Ltempo = map(sensorValue, 1450,2400,50,254);
       //tempo = tempo /5;
       
       analogWrite(rechts, 0);  
-      analogWrite(links, tempo); 
+      analogWrite(links, Ltempo); 
+      if (debug) {
+      Serial.println(F("Links"));
+      Serial.print(F("LTempo "));Serial.println(Ltempo);
+      }   
      
     }  else {
       analogWrite(links, 0);  
@@ -149,8 +156,8 @@ int rcMove() {
     }///End Sensor Check
     
   if (debug) { 
-    Serial.print(F("Tempo "));Serial.println(tempo);
-    Serial.print(F("Value "));Serial.println(sensorValue);
+    //Serial.print(F("Tempo "));Serial.println(tempo);
+    //Serial.print(F("Value "));Serial.println(sensorValue);
     }
   
 }
