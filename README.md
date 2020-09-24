@@ -38,4 +38,14 @@ Take care that all pin in right order
 
 
 
+
+
 ....more to come :-)
+
+Good Dome Motors:
+https://www.exp-tech.de/motoren/dc-getriebemotoren/9794/50-1-metal-gearmotor-37dx54l-mm-helical-pinion?c=1198
+
+
+https://www.exp-tech.de/motoren/dc-getriebemotoren/9795/70-1-metal-gearmotor-37dx54l-mm-helical-pinion?c=1198
+
+
