@@ -1,11 +1,15 @@
 ///Automatische Domebewegung Steuerung
 ///Doc Snyder Tool Droid DomeController
 ///für Arduino pro mini
+#define USE_DEBUG
+#define USE_SERVO_DEBUG
+#define USE_VERBOSE_SERVO_DEBUG
 
 #include "ReelTwo.h"
 #include "core/Animation.h"
 #include "core/DelayCall.h"
 #include "ServoDispatchDirect.h"
+
 #include "ServoSequencer.h"
 
 #include <SoftwareSerial.h>        // Durch diesen Include können wir die Funktionen 
@@ -21,18 +25,21 @@ AK9753 movementSensor;
 int ir1, ir2, ir3, ir4;
 float temp = 24;
 
-#include "Mdriver.h"
-#include "animation.h"
+//#include "Mdriver.h"
 
 ServoDispatchDirect<SizeOfArray(servoSettings)> servoDispatch(servoSettings);
 ServoSequencer servoSequencer(servoDispatch);
 AnimationPlayer player(servoSequencer);
 
+
+#include "Mdriver.h"
+#include "animation.h"
+
 #include "command.h"
 
 
 void setup(){
-  Serial.begin(9600);
+  //Serial.begin(9600);
   MainInput.begin(9600);
    // set the digital pin as output:
   pinMode(ledPin1, OUTPUT);
@@ -47,7 +54,8 @@ void setup(){
 
   digitalWrite(links, 0);  
   digitalWrite(rechts, 0); 
- 
+
+   
   // if analog input pin 0 is unconnected, random analog
   // noise will cause the call to randomSeed() to generateB
   // different seed numbers each time the sketch runs.
@@ -70,6 +78,9 @@ void setup(){
         delay(3000);
     }
    //last_time = millis();
+
+   servoDispatch.moveTo(0,150,800,1000);
+     
    
 }
 
@@ -78,8 +89,8 @@ void loop() {
 
     Comand();
     AnimatedEvent::process();
-
-
+    
+   
 
     
 

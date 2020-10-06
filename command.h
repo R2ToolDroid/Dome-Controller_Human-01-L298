@@ -7,11 +7,13 @@ void ProzessComando() {
       {             
        Serial.println("test gefunden");
        ANIMATION_PLAY_ONCE(player, test);    
+       //servoDispatch.moveTo(0,150,100,1500);
       }
       
     if (data == "stop" )
       {         
        Serial.println("reset player");
+       
        ANIMATION_PLAY_ONCE(player, stopnow);  
       }
 

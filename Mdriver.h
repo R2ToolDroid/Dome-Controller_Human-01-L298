@@ -267,30 +267,39 @@ void human(){
 
         
 
-        
+        if ((vpos > 1800) || (vpos < 500)){
+          vpos = 1000;        
+        }
 
         if ((Sdiff >= gap)||(Sdiff <= -gap)){ diff = true;}
 
         if (diff){
 
            if (ir4 > ir2){ ////turn right
-                //Serial.print("Dreh nach Rechts");
+                Serial.println("Dreh nach Rechts");
                 digitalWrite(ledPin2, HIGH);  //Dreh nach R
                 analogWrite(links,Htempo); 
-           }
+                servoDispatch.moveTo(0,50,0,500);
+           }    
            
             if (ir2 > ir4){ ////turn left
-                //Serial.print("Dreh nach links");
+                Serial.println("Dreh nach links");
                 digitalWrite(ledPin1, HIGH);  //Dreh nach L
                 analogWrite(rechts,Htempo); 
+                servoDispatch.moveTo(0,50,0,1200);
            } 
         } else {
           analogWrite(rechts, 0); 
           analogWrite(links, 0); 
           digitalWrite(ledPin2, LOW);  //Dreh nach L
           digitalWrite(ledPin1, LOW);  //Dreh nach R
+          
+          Serial.println("--Mitte--");
+          
+          
         }
-
+        
+        //servoDispatch.moveTo(0,0,0,1000);
       
     }
     

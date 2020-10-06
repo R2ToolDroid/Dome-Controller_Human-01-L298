@@ -38,11 +38,13 @@ int sensorCenter = 8; //vorher auf 16
 int rotime;
 unsigned long zeit1, zeit2;
 int sensorRC = 21; ///von 2 auf 21 geänder wg I2C
-int sensorRC_out = 10;
+//int sensorRC_out = 10;
 int Mode = 2;// 0=RandMove // 1=RCMove  //2=human //3=Service
 int moving = 0;
 int SendStatus = 16; /// StatusSignal to PowerControl
 int stat=0;
+
+int vpos = 1000;
 
 int centerState = 0;
 const int ledPinC =  20;  
@@ -53,15 +55,11 @@ const int ledPin2 =  19;
 int ledState1 = LOW; 
 int ledState2 = LOW; 
 
-#define PIE_PANEL          0x0008
-#define TOP_PIE_PANEL      0x0010
-#define PIE_PANELS_MASK    (PIE_PANEL)
+#define PIE_PANEL          0
+//#define TOP_PIE_PANEL      0x0010
+//#define PIE_PANELS_MASK    (PIE_PANEL)
 
 
 const ServoSettings servoSettings[] PROGMEM = {
-    { 2,  PIE_PANEL,     1250, 1900 },  /* 0: pie panel 1 */
-    { 3,  PIE_PANEL,     1075, 1700 },  /* 1: pie panel 2 */
-    { 4,  PIE_PANEL,     1200, 2000 },  /* 2: pie panel 3 */
-    { 5,  PIE_PANEL,      750, 1450 },  /* 3: pie panel 4 */
-    { 6,  TOP_PIE_PANEL, 1250, 1850 },  /* 4: dome top panel */
-};
+    { 10,  PIE_PANEL,     1000, 1650 },  /* 0: pie panel 1 */
+    };

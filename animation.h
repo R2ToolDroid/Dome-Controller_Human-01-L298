@@ -15,20 +15,24 @@ ANIMATION (test)
       DO_ONCE_AND_WAIT({ 
       Serial.println("Rechts");
       rotateR(1500);
+      servoDispatch.moveTo(0,150,0,400);
+        
       },1500)
 
       DO_ONCE_AND_WAIT({ 
       Serial.println("Motor Aus");
-      resetM();
+      //resetM();
       },1000)
       
       DO_ONCE_AND_WAIT({ 
       Serial.println("Links");
       rotateL(2500);
-      },2500)
+      servoDispatch.moveTo(0,150,0,1350);
+      },1500)
 
       DO_ONCE_AND_WAIT({ 
       Serial.println("Fertig;-)");
+      
       resetM();
       },1000)
       
@@ -51,7 +55,8 @@ ANIMATION (nono)
     DO_ONCE_AND_WAIT({ 
       //Serial.println("Rechts");
       rotateR(500);
-      },500)
+      
+      },1500)
 
       DO_ONCE_AND_WAIT({ 
       //Serial.println("Motor Aus");
@@ -61,7 +66,8 @@ ANIMATION (nono)
       DO_ONCE_AND_WAIT({ 
       //Serial.println("Links");
       rotateL(500);
-      },500)
+      
+      },1500)
 
       DO_ONCE_AND_WAIT({ 
       //Serial.println("Motor Aus");
@@ -121,6 +127,7 @@ ANIMATION(p1)  {
       },Rpos*60)
       DO_ONCE_AND_WAIT({ 
       //Serial.println("Fertig;-)");
+      
       resetM();
       },100)      
       DO_END()
