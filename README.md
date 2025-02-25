@@ -4,7 +4,7 @@ New Version of Dome Movement
 
 This Controller replace the old one and get a new Level
 
-Best Motor for a heavy Aluminum Dome wii be the 70:1 Metal Gearmotor 37Dx54L mm (Helical Pinion)  70:1 or 150 RPM 12V
+Best Motor for a heavy Aluminum Dome will be the 70:1 Metal Gearmotor 37Dx54L mm (Helical Pinion)  70:1 or 150 RPM 12V
 https://exp-tech.de/products/70-1-metal-gearmotor-37dx54l-mm-helical-pinion
 
 
